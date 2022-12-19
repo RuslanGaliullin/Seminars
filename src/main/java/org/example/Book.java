@@ -1,15 +1,14 @@
 package org.example;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 public class Book {
-    private final Integer copyNum;
     private final String Title;
 
-    public Integer getCopyNum() {
-        return copyNum;
-    }
+    private final Date pubDate;
+
 
     private final Integer ISBN;
     private final List<String> authors;
@@ -26,23 +25,30 @@ public class Book {
         return authors;
     }
 
+    public Date getPubDate() {
+        return pubDate;
+    }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return copyNum.equals(book.copyNum) && Title.equals(book.Title) && ISBN.equals(book.ISBN) && authors.equals(book.authors);
+        return Title.equals(book.Title)
+                && ISBN.equals(book.ISBN)
+                && authors.equals(book.authors)
+                && pubDate.equals(book.pubDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(copyNum, Title, ISBN, authors);
+        return Objects.hash(Title, ISBN, authors, pubDate);
     }
 
-    public Book(Integer copyNum, String title, Integer isbn, List<String> authors) {
-        this.copyNum = copyNum;
+    public Book(String title, Date pubDate, Integer isbn, List<String> authors) {
         Title = title;
+        this.pubDate = pubDate;
         ISBN = isbn;
         this.authors = authors;
     }
